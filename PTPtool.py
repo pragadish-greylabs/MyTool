@@ -35,9 +35,9 @@ class PTP:
         logger.info("creating a tool for date validation")
 
         class Schema(BaseModel):
-            dateVariable : Optional[str] = Field(default = None , description = "this is the variable for our date ")
+            dateVariable : Optional[str] = Field(default = None , description = "this is variable for the date which the customer passes")
 
-        @tool("checkPTP",description = "use this tool to check whether the date is not in the past and also the date is within 7 days from today",args_schema = Schema)
+        @tool("checkPTP",description = "use this tool to check whether the date is not in the past and the date is within 7 days from today , also the input should always be in the string format where the date should come first , month should come second , year should come last",args_schema = Schema)
         def checkPTP(dateVariable:Optional[str]=None)->Dict[Any,Any]:
             """
             this is where we check whether it is a past date or future and also check if it is within the 7 day timeline 
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     toolll = instance.tool_for_checkPTP()
 
     result = toolll.invoke({
-        "dateVariable":"08-01-2026"
+        "dateVariable":""
     })
 
     print(result)
